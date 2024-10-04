@@ -1,0 +1,102 @@
+[gd_scene load_steps=10 format=3 uid="uid://cx7yqgl33o7c3"]
+
+[ext_resource type="Script" path="res://character.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://b2ra0yta4my4n" path="res://asset/texture/main_char.png" id="2_wqnkc"]
+[ext_resource type="Texture2D" uid="uid://q10jhyc4krwr" path="res://asset/texture/main_char_expression.png" id="3_y8qsc"]
+
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(5.5, 2)
+
+[sub_resource type="Animation" id="Animation_6hnxl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_bsv58"]
+resource_name = "walk"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bcg8w"]
+_data = {
+"RESET": SubResource("Animation_6hnxl"),
+"walk": SubResource("Animation_bsv58")
+}
+
+[sub_resource type="OccluderPolygon2D" id="3"]
+closed = false
+cull_mode = 1
+polygon = PackedVector2Array(-3, 16, -3, 10, -5, 1, -5, -2, -3, -5, -3, -10, -3, -13, 0, -15, 3, -13, 3, -5, 5, -1, 2, 10, 2, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rptec"]
+radius = 18.0278
+
+[node name="character" type="CharacterBody2D"]
+y_sort_enabled = true
+script = ExtResource("2")
+
+[node name="emotions" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture_filter = 1
+texture = ExtResource("3_y8qsc")
+offset = Vector2(0, -15)
+hframes = 3
+vframes = 5
+frame = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_wqnkc")
+offset = Vector2(0, -15)
+hframes = 4
+vframes = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+top_level = true
+y_sort_enabled = true
+position = Vector2(-0.5, -0.03125)
+shape = SubResource("2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bcg8w")
+}
+speed_scale = 1.5
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -15)
+occluder = SubResource("3")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -11)
+shape = SubResource("CircleShape2D_rptec")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

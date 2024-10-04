@@ -1,0 +1,197 @@
+[gd_scene load_steps=15 format=3 uid="uid://dkn8fo5vpvn4g"]
+
+[ext_resource type="PackedScene" uid="uid://cx7yqgl33o7c3" path="res://character.tscn" id="1_0x3vn"]
+[ext_resource type="Texture2D" uid="uid://q10jhyc4krwr" path="res://asset/texture/main_char_expression.png" id="2_6read"]
+[ext_resource type="Texture2D" uid="uid://b21yh2gdehao1" path="res://asset/texture/tree2.png" id="2_f0w73"]
+[ext_resource type="Texture2D" uid="uid://b2ra0yta4my4n" path="res://asset/texture/main_char.png" id="3_fnf86"]
+[ext_resource type="Texture2D" uid="uid://bcsypank0ooul" path="res://asset/texture/chest.png" id="5_4xegt"]
+
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(5.5, 1.875)
+
+[sub_resource type="Animation" id="Animation_6hnxl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_bsv58"]
+resource_name = "walk"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bcg8w"]
+_data = {
+"RESET": SubResource("Animation_6hnxl"),
+"walk": SubResource("Animation_bsv58")
+}
+
+[sub_resource type="OccluderPolygon2D" id="3"]
+closed = false
+cull_mode = 1
+polygon = PackedVector2Array(-3, 16, -3, 10, -5, 1, -5, -2, -3, -5, -3, -10, -3, -13, 0, -15, 3, -13, 3, -5, 5, -1, 2, 10, 2, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rptec"]
+radius = 18.0278
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ejcqo"]
+size = Vector2(12, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wj68q"]
+size = Vector2(27, 7)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eq71l"]
+radius = 17.0294
+
+[node name="world" type="Node2D"]
+y_sort_enabled = true
+
+[node name="character" parent="." instance=ExtResource("1_0x3vn")]
+position = Vector2(195, 110)
+
+[node name="elise" type="CharacterBody2D" parent="."]
+y_sort_enabled = true
+position = Vector2(105, 140)
+
+[node name="emotions" type="Sprite2D" parent="elise"]
+y_sort_enabled = true
+texture_filter = 1
+texture = ExtResource("2_6read")
+offset = Vector2(0, -15)
+hframes = 3
+vframes = 5
+frame = 11
+
+[node name="Sprite2D" type="Sprite2D" parent="elise"]
+texture_filter = 1
+texture = ExtResource("3_fnf86")
+offset = Vector2(0, -15)
+hframes = 4
+vframes = 7
+frame = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="elise"]
+top_level = true
+y_sort_enabled = true
+position = Vector2(-0.5, 0)
+shape = SubResource("2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="elise"]
+libraries = {
+"": SubResource("AnimationLibrary_bcg8w")
+}
+speed_scale = 1.5
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="elise"]
+y_sort_enabled = true
+position = Vector2(0, -15)
+occluder = SubResource("3")
+
+[node name="Area2D" type="Area2D" parent="elise"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="elise/Area2D"]
+position = Vector2(0, -11)
+shape = SubResource("CircleShape2D_rptec")
+
+[node name="georges" type="CharacterBody2D" parent="."]
+y_sort_enabled = true
+position = Vector2(150, 59)
+
+[node name="emotions" type="Sprite2D" parent="georges"]
+y_sort_enabled = true
+texture_filter = 1
+texture = ExtResource("2_6read")
+offset = Vector2(0, -15)
+hframes = 3
+vframes = 5
+frame = 6
+
+[node name="Sprite2D" type="Sprite2D" parent="georges"]
+texture_filter = 1
+texture = ExtResource("3_fnf86")
+offset = Vector2(0, -15)
+hframes = 4
+vframes = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="georges"]
+top_level = true
+y_sort_enabled = true
+position = Vector2(-0.5, 0)
+shape = SubResource("2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="georges"]
+libraries = {
+"": SubResource("AnimationLibrary_bcg8w")
+}
+speed_scale = 1.5
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="georges"]
+y_sort_enabled = true
+position = Vector2(0, -15)
+occluder = SubResource("3")
+
+[node name="Area2D" type="Area2D" parent="georges"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="georges/Area2D"]
+position = Vector2(0, -11)
+shape = SubResource("CircleShape2D_rptec")
+
+[node name="tree" type="StaticBody2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-1, 0)
+
+[node name="Tree2" type="Sprite2D" parent="tree"]
+z_as_relative = false
+texture_filter = 1
+position = Vector2(73, 72)
+texture = ExtResource("2_f0w73")
+offset = Vector2(0, -25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="tree"]
+y_sort_enabled = true
+position = Vector2(73, 73.5)
+shape = SubResource("RectangleShape2D_ejcqo")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(226, 55)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0.5, -2.5)
+shape = SubResource("RectangleShape2D_wj68q")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture_filter = 1
+position = Vector2(0, -1)
+texture = ExtResource("5_4xegt")
+offset = Vector2(0, -9)
+
+[node name="Area2D" type="Area2D" parent="StaticBody2D"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Area2D"]
+position = Vector2(0, -9)
+shape = SubResource("CircleShape2D_eq71l")
+
+[connection signal="area_entered" from="elise/Area2D" to="elise" method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="georges/Area2D" to="georges" method="_on_area_2d_area_entered"]

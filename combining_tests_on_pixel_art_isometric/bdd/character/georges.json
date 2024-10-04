@@ -1,0 +1,10 @@
+{
+	"name" : "Georges Paris",
+	
+	"dialog_minigame" : {
+		"positives" : ["G2"],
+		"neutrals" : ["G1"],
+		"negatives" : ["G4", "G3"],
+	},
+	"affection" : 0
+}

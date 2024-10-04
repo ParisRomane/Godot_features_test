@@ -1,0 +1,10 @@
+{
+	"name" : "Élise de la Tour",
+	
+	"dialog_minigame" : {
+		"positives" : ["G1","G4"],
+		"neutrals" : ["G3"],
+		"negatives" : ["G2"],
+	},
+	"affection" : 0
+}

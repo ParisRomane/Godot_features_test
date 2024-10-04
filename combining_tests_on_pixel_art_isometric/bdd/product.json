@@ -1,0 +1,25 @@
+{
+	"apples" : 
+	{ 
+		"item_name" : "apples",
+		"max_price" : 10,
+		"qualities" : 
+		{
+			"heal" : 10
+		},
+ 		"description" :  "A apple a day keeps the doctor away",
+		"texture" : "res://asset/texture/book.png",
+	},
+	
+"banana" : 
+	{ 
+		"item_name" : "banana",
+		"max_price" : 5,
+		"qualities" : 
+		{
+			"heal" : 7
+		},
+ 		"description" :  "full of protein !!",
+		"texture" : "res://asset/texture/lantern.png",
+	}
+}

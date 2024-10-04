@@ -1,0 +1,26 @@
+{
+	"G1" : 
+		{
+			"fr" : "parler du beau temps",
+			"eng" : "talking about the wether",
+			"texture" : "res://icon.svg",
+		},
+	"G2" : 
+		{
+			"fr" : "parler des ragots",
+			"eng" : "gossiping",
+			"texture" : "res://icon.svg",
+		},
+	"G3" : 
+		{
+			"fr" : "parler politique",
+			"eng" : "talking about politics",
+			"texture" : "res://icon.svg",
+		},
+	"G4" : 
+		{
+			"fr" : "parler nature",
+			"eng" : "talking about nature",
+			"texture" : "res://icon.svg",
+		},
+}

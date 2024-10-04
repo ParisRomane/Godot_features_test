@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5k8sr11yu11g"]
+
+[ext_resource type="PackedScene" uid="uid://drnay02i7bp0k" path="res://items.tscn" id="1_8vj0i"]
+[ext_resource type="Script" path="res://node.gd" id="1_phe06"]
+[ext_resource type="PackedScene" uid="uid://dk60hhq4blsc7" path="res://inventory.tscn" id="2_60unj"]
+[ext_resource type="PackedScene" uid="uid://chocwyc7ld334" path="res://inventory_window.tscn" id="4_fetxb"]
+[ext_resource type="Script" path="res://bdd_json_loader.gd" id="5_opr4i"]
+
+[node name="node" type="Node"]
+script = ExtResource("1_phe06")
+
+[node name="Item" parent="." instance=ExtResource("1_8vj0i")]
+
+[node name="Inventory" parent="." instance=ExtResource("2_60unj")]
+
+[node name="inventory_window" parent="." instance=ExtResource("4_fetxb")]
+
+[node name="inventory_window2" parent="." instance=ExtResource("4_fetxb")]
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("5_opr4i")
+
+[connection signal="close_requested" from="inventory_window" to="inventory_window" method="_on_close_requested"]
+[connection signal="close_requested" from="inventory_window2" to="inventory_window2" method="_on_close_requested"]
